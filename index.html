@@ -16,4 +16,24 @@ tick();setInterval(tick,1000);
 function openEnv(){if(!cover||!env)return;env.classList.add('open');setTimeout(()=>cover.classList.add('hide'),220);setTimeout(()=>cover.remove(),1100)}
 env.addEventListener('click',openEnv);
 env.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openEnv()}});
-gf.addEventListener('submit',e=>{e.preventDefault();const name=gn.value.trim(), message=gm.value.trim();if(!name||!message)return;const card=document.createElement('div');card.className='guest';const b=document.createElement('b');b.textContent=name;const p=document.createElement('p');p.textContent=message;card.append(b,p);gl.prepend(card);gf.reset()});</script></body></html>
+gf.addEventListener('submit',e=>{
+e.preventDefault();
+const name=gn.value.trim(),message=gm.value.trim();
+if(!name||!message)return;
+fetch('https://script.google.com/macros/s/AKfycbxH7nv9JPPJwDFR9wBgpCkt5VNN5tiViBI1MyGV9RtkF6y8WDAEG7dt2YrM9co-1GPZFw/exec',{
+method:'POST',
+mode:'no-cors',
+headers:{'Content-Type':'text/plain;charset=utf-8'},
+body:JSON.stringify({name:name,message:message,email:''})
+});
+const card=document.createElement('div');
+card.className='guest';
+const b=document.createElement('b');
+b.textContent=name;
+const p=document.createElement('p');
+p.textContent=message;
+card.append(b,p);
+gl.prepend(card);
+gf.reset();
+});
+</script></body></html>
